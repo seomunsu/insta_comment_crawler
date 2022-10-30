@@ -1,3 +1,5 @@
+import unicodedata
+
 from bs4 import BeautifulSoup
 from time import sleep
 
@@ -82,7 +84,8 @@ class InstagramCrawler:
 
         for ul in all_ul[:self.__option.collect.items.comment.recentCount]:
             comments.append(
-                ul.find(instagram_consts.TAG_SPAN, instagram_consts.COMMENT_DETAIL_CLASS).getText()
+                unicodedata.normalize('NFC', ul.find(instagram_consts.TAG_SPAN,
+                                                     instagram_consts.COMMENT_DETAIL_CLASS).getText())
             )
 
         return comments

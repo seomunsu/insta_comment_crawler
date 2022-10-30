@@ -42,6 +42,12 @@ class ChromeDriver:
                 service_args=service_args,
                 chrome_options=chrome_option
             )
+        elif 'windows' in sys.platform.lower():
+            driver = webdriver.Chrome(
+                executable_path='%s/bin/chromedriver.exe' % dir_path,
+                service_args=service_args,
+                chrome_options=chrome_option
+            )
         else:
             driver = webdriver.Chrome(
                 executable_path='%s/bin/chromedriver' % dir_path,
