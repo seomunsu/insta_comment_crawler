@@ -32,10 +32,20 @@
 크롤링은 기본적으로 브라우저가 보이지 않는 형태로 진행되며
 해당 옵션의 앞에 "#" 을 붙여 주석 처리하는 경우, 브라우저 보이는 형태로 진행.  
 
+# 환경
+- python 3
+- pip
+
 # 실행 방법
+```shell
+pip install -r requirements.txt
+```
+의존성 설치
+
 ```shell
 python crawler.py
 ```
+실행
 
 # 생성되는 파일
 ```text
