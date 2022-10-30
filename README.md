@@ -12,9 +12,9 @@
 
 위의 system, platform, processor에 맞는 파일을 다운로드.
 
-압축을 해제하고 `crawler/bin` directory에 추가하여 `chromedriver`로 이름 변경.
+압축을 해제하고 `./bin` directory에 추가하여 `chromedriver`로 이름 변경 필요하며
 
-기본적으로 `crawler/bin/chromedriver_mac_arm64` 파일 포함됨.
+windows는 `chromedriver.exe`로 변경 해주세요.
 
 ## crawler.yaml 파일의 값 변경
 - instagram.login.username : 인스타그램 접속할 아이디
@@ -40,18 +40,57 @@
 ```shell
 pip install -r requirements.txt
 ```
-의존성 설치
+의존성 설치가 정상적이지 않은 경우
+
+```shell
+pip install async-generator
+pip install attrs
+pip install beautifulsoup4
+pip install certifi
+pip install charset-normalizer
+pip install decorator
+pip install exceptiongroup
+pip install fake-useragent
+pip install h11
+pip install html5lib
+pip install idna
+pip install lxml
+pip install numpy
+pip install outcome
+pip install pandas
+pip install py
+pip install PySocks
+pip install python-dateutil
+pip install pytz
+pip install PyYAML
+pip install requests
+pip install retry
+pip install selenium
+pip install six
+pip install sniffio
+pip install sortedcontainers
+pip install soupsieve
+pip install trio
+pip install trio-websocket
+pip install urllib3
+pip install webencodings
+pip install wsproto
+pip install XlsxWriter
+```
+직접 설치
 
 ```shell
 python crawler.py
+or
+py crawler.py
 ```
 실행
 
 # 생성되는 파일
 ```text
-ex : 2022-10-30 03:04:59.176011_instagram.csv
+ex : 20221030030459_instagram.csv
 ```
-년-월-일 시:분:초.나노초_instagram.csv
+년월일시분초_instagram.csv
 
 # 로직
 - collect.profiles 해당 profile 접근
