@@ -64,13 +64,13 @@ ex : 2022-10-30 03:04:59.176011_instagram.csv
 # 로그 확인 필요사항
 ## 로그 패턴
 ```text
-[INFO][    InstagramCrawler][          move_to_profile_page][2022-10-30 03:20:05,808] : profile : ch.yoooon
+[INFO][    InstagramCrawler][          move_to_profile_page][2022-10-30 03:20:05,808] : profile : test
 ```
 - `로그 레벨` -> INFO
 - `class 파일` -> InstagramCrawler
 - `실행 function` -> move_to_profile_page
 - `시간` -> 2022-10-30 03:20:05,808
-- `메시지` -> profile : ch.yoooon
+- `메시지` -> profile : test
 
 
 ## Case 1
@@ -83,9 +83,9 @@ ex : 2022-10-30 03:04:59.176011_instagram.csv
 
 ## Case 2
 ```text
- └─ profile(cute._.dailydob) not found username is pass
+ └─ profile(test) not found username is pass
 ```
-- `cute._.dailydob` profile에 해당하는 인스타그램이 존재하지 않음.
+- `test` profile에 해당하는 인스타그램이 존재하지 않음.
 - 결과 : skip.
 
 ## Case 3
