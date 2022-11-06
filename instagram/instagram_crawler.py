@@ -3,6 +3,7 @@ import unicodedata
 from bs4 import BeautifulSoup
 from time import sleep
 
+from tqdm import tqdm
 from core import Crawler
 from exception import NotFoundAttributeException
 from exception import RetryException
@@ -67,14 +68,47 @@ class InstagramCrawler:
             return False
 
     def get_current_posts(self):
+        timeout = 20
+        wait_time = 5
+        pre_post_count = 0
+        short_codes = set()
+        limit = self.__option.collect.items.post.recentCount
+
+        pbar = tqdm(total=limit)
+        pbar.set_description('Fetching posts')
+
+        while len(short_codes) < limit and wait_time < timeout:
+            post_count, wait_time = self.fetch(pbar, short_codes, pre_post_count, wait_time)
+            pbar.update(post_count - pre_post_count)
+            pre_post_count = post_count
+
+        pbar.close()
+        self.__log.info('Done Fetched %s posts.' % (min(len(short_codes), limit)))
+
+        return list(short_codes)[:limit]
+
+    def fetch(self, pbar, short_codes, pre_post_count, wait_time):
         soup = BeautifulSoup(self.__crawler.page_source(), 'html.parser')
         hrefs = soup.article.find_all('a', href=True)
+        for a in hrefs:
+            short_code = a['href']
+            if short_code not in short_codes:
+                short_codes.add(short_code)
 
-        short_codes = []
-        for a in hrefs[:self.__option.collect.items.post.recentCount]:
-            short_codes.append(a['href'])
+        if pre_post_count == len(short_codes):
+            pbar.set_description('Wait for %s sec' % wait_time)
+            sleep(wait_time)
+            pbar.set_description('Fetching...')
 
-        return short_codes
+            wait_time *= 2
+            self.__crawler.scroll_up(300)
+        else:
+            wait_time = 1
+
+        pre_post_count = len(short_codes)
+        self.__crawler.scroll_down()
+
+        return pre_post_count, wait_time
 
     def get_comments(self):
         comments = []

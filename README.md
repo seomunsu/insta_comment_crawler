@@ -70,6 +70,7 @@ pip install six
 pip install sniffio
 pip install sortedcontainers
 pip install soupsieve
+pip install tqdm
 pip install trio
 pip install trio-websocket
 pip install urllib3

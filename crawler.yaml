@@ -5,8 +5,8 @@ instagram:
 collect:
   items:
     post:
-      recentCount: 10 # max 12
+      recentCount: 10 # max posts
     comment:
-      recentCount: 100 # max 9999
+      recentCount: 100 # max comments 9999
   profiles:
     - test
